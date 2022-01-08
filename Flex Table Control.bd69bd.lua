@@ -1,4 +1,5 @@
-tableHeightOffset = 0.3
+tableEdgeHeightOffset = -9
+tableLegHeightOffset = 0.3
 
 function onSave()
     saved_data = JSON.encode({tid=tableImageData, cd=checkData})
@@ -20,7 +21,7 @@ function onload(saved_data)
     --Disables interactable status of objects with GUID in list
     for _, guid in ipairs(ref_noninteractable) do
         local obj = getObjectFromGUID(guid)
-        if obj then obj.interactable = true end
+        if obj then obj.interactable = false end
     end
 
     --Establish references to table parts
@@ -237,15 +238,15 @@ function changeTableScale(width, depth)
     obj_surface.setScale({width, 1, depth})
 
     --Moving table elements to accomodate new scale
-    obj_side_lef.setPosition({-width2pos,tableHeightOffset,0})
-    obj_side_rig.setPosition({ width2pos,tableHeightOffset,0})
-    obj_side_top.setPosition({0,tableHeightOffset, depth2pos})
-    obj_side_bot.setPosition({0,tableHeightOffset,-depth2pos})
-    obj_leg1.setPosition({-width2pos,tableHeightOffset,-depth2pos})
-    obj_leg2.setPosition({-width2pos,tableHeightOffset, depth2pos})
-    obj_leg3.setPosition({ width2pos,tableHeightOffset, depth2pos})
-    obj_leg4.setPosition({ width2pos,tableHeightOffset,-depth2pos})
-    self.setPosition(obj_leg4.positionToWorld({-22.12, 8.74,-19.16}))
+    obj_side_lef.setPosition({-width2pos,tableEdgeHeightOffset,0})
+    obj_side_rig.setPosition({ width2pos,tableEdgeHeightOffset,0})
+    obj_side_top.setPosition({0,tableEdgeHeightOffset, depth2pos})
+    obj_side_bot.setPosition({0,tableEdgeHeightOffset,-depth2pos})
+    obj_leg1.setPosition({-width2pos,tableLegHeightOffset,-depth2pos})
+    obj_leg2.setPosition({-width2pos,tableLegHeightOffset, depth2pos})
+    obj_leg3.setPosition({ width2pos,tableLegHeightOffset, depth2pos})
+    obj_leg4.setPosition({ width2pos,tableLegHeightOffset,-depth2pos})
+    self.setPosition(obj_leg4.positionToWorld({-22.12, 0,-19.5}))
     --Only enabled when changing tableHeightOffset
     --obj_surface.setPosition({0,tableHeightOffset,0})
 end
